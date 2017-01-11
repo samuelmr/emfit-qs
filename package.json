@@ -1,0 +1,39 @@
+{
+  "name": "emfit-qs",
+  "version": "0.1.0",
+  "description": "Emfit QS API client",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha",
+    "prepublish": "require-self"
+  },
+  "keywords": [
+    "api",
+    "emfit",
+    "hrv",
+    "qs",
+    "quantified self",
+    "self tracking",
+    "sleep"
+  ],
+  "author": "Samuel Rinnetmäki",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/samuelmr/emfit-qs.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1"
+  },
+  "devDependencies": {
+    "nock": "^9.0.2",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "require-self": "^0.1.0"
+  },
+  "bugs": {
+    "url": "https://github.com/samuelmr/emfit-qs/issues"
+  },
+  "homepage": "https://github.com/samuelmr/emfit-qs#readme"
+}
