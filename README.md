@@ -4,9 +4,6 @@
 
 Unofficial [Emfit QS](https://www.emfitqs.com/) API client for node.js
 
-## Features
-Fetch latest data from the API
-
 ## Usage
 
 ### Install
@@ -15,7 +12,7 @@ Fetch latest data from the API
 npm install emfit-qs
 ```
 
-### Get latest sleep data
+### Quick example
 
 ```js
 
@@ -25,7 +22,7 @@ var token = 'MY_ACCESS_TOKEN'
 var qs = new QS(token)
 
 qs.user().then(function(data) {
-    console.log(data.device_settings.length + ' devices found for ' + data.user.email)
+  console.log(data.device_settings.length + ' devices found for ' + data.user.email)
 
   // get latest data for first device found
   let deviceId = data.device_settings[0].device_id
@@ -39,5 +36,45 @@ qs.user().then(function(data) {
 }).catch(function(error){
   console.error(error)
 })
+
+```
+
+## Features
+Supported APis
+
+### latest
+```js
+
+qs.latest(deviceId)
+
+```
+
+### login
+```js
+
+qs.login('myusername', 'mypassword').then(function(data) {
+  qs.statuses() // token set automatically
+})
+
+```
+
+### status
+```js
+
+qs.status(deviceId)
+
+```
+
+### statuses
+```js
+
+qs.statuses()
+
+```
+
+### user
+```js
+
+qs.user()
 
 ```
