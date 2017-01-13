@@ -59,7 +59,7 @@ Client.prototype.statuses = function () {
 
 Client.prototype.latest = function (deviceId, apiVersion) {
   if (!apiVersion) apiVersion = 4
-  let url = '/v' + apiVersion + '/presence/' + deviceId + '/latest'
+  var url = '/v' + apiVersion + '/presence/' + deviceId + '/latest'
   if (apiVersion == 1) url = '/api/v1/presence/latest/' + deviceId
   return this.request.get(url)
 }
