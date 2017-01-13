@@ -57,8 +57,19 @@ Client.prototype.statuses = function () {
   return this.request.get(opts)
 }
 
-Client.prototype.latest = function (deviceId) {
-  return this.request.get('/v4/presence/' + deviceId + '/latest')
+Client.prototype.latest = function (deviceId, apiVersion) {
+  if (!apiVersion) apiVersion = 4
+  let url = '/v' + apiVersion + '/presence/' + deviceId + '/latest'
+  if (apiVersion == 1) url = '/api/v1/presence/latest/' + deviceId
+  return this.request.get(url)
+}
+
+Client.prototype.presence = function (periodId) {
+  return this.request.get('/v1/presence/' + periodId)
+}
+
+Client.prototype.trends = function (deviceId) {
+  return this.request.get('/api/v1/trends/' + deviceId)
 }
 
 module.exports = Client
