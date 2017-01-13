@@ -4,10 +4,14 @@ const request = require('request-promise'),
 // request.debug = true
 
 function Client(token) {
+  this.init(token)
+}
+
+Client.prototype.init = function (token) {
   this.token = token
   this.request = request.defaults({
     baseUrl: config.baseUrl,
-    qs: {'remember_token': token},
+    qs: {'remember_token': this.token},
     transform: function (response) {
       return JSON.parse(response)
     }
@@ -28,7 +32,7 @@ Client.prototype.login = function (username, password) {
     }
   }
   return request.post(opts).then(function(data) {
-    self.token = data.remember_token
+    self.init(data.remember_token)
     return data
   })
 }
