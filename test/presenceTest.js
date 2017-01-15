@@ -48,45 +48,6 @@ describe('Latest information ', function () {
       "to_string": "06:38"
     }
 
-    var v2Data = {
-      "id": "1234",
-      "device_id": 131,
-      "tossnturn_count": 17,
-      "sleep_score": 70,
-      "hrv_lf": 46,
-      "hrv_hf": 54,
-      "hrv_rmssd_evening": 22.4,
-      "hrv_rmssd_morning": 39.9,
-      "hrv_rmssd_hist_data": null,
-      "object_id": "1234",
-      "time_start": 1484256000,
-      "time_end": 1484282280,
-      "time_duration": 26247,
-      "sleep_class_awake_duration": 3600,
-      "sleep_class_awake_percent": 14,
-      "sleep_class_deep_duration": 3690,
-      "sleep_class_light_duration": 11700,
-      "sleep_class_rem_duration": 7260,
-      "sleep_class_light_percent": 52,
-      "sleep_class_rem_percent": 32,
-      "sleep_class_deep_percent": 16,
-      "sleep_awakenings": 1,
-      "sleep_duration": 22650,
-      "sleep_onset_duration": 2550,
-      "time_in_bed_duration": 26247,
-      "sleep_efficiency": 86,
-      "measured_hr_avg": 60,
-      "measured_rr_avg": 14,
-      "measured_activity_avg": 67,
-      "measured_hr_min": 47,
-      "measured_hr_max": 85,
-      "measured_rr_min": 4,
-      "measured_rr_max": 26,
-      "bed_exit_count": 1,
-      "bed_exit_periods": [],
-      "bed_exit_duration": 152
-    }
-
     var v4Data = {
       id: 'test',
       device_id: 131,
@@ -106,21 +67,14 @@ describe('Latest information ', function () {
 
     beforeEach(function (done) {
       nock(config.baseUrl)
-      .get('/api/v1/presence/latest/131')
+      .get('/api/v1/presence/1234')
       .query({
         remember_token: 'token'
       })
       .reply(200, JSON.stringify(v1Data))
 
       nock(config.baseUrl)
-      .get('/v2/presence/131/latest')
-      .query({
-        remember_token: 'token'
-      })
-      .reply(200, JSON.stringify(v2Data))
-
-      nock(config.baseUrl)
-      .get('/v4/presence/131/latest')
+      .get('/v4/presence/131/1234')
       .query({
         remember_token: 'token'
       })
@@ -129,8 +83,8 @@ describe('Latest information ', function () {
       done()
     })
 
-    it('should get status for device (v1)', function (done) {
-      qs.latest(131, 1).then(function (response) {
+    it('should get presence data of device (v1)', function (done) {
+      qs.presence(1234, null, 1).then(function (response) {
         should.exist.response
         response.device_id.should.equal(131)
         response.duration_in_bed.should.equal(26095)
@@ -138,17 +92,8 @@ describe('Latest information ', function () {
       })
     })
 
-    it('should get status for device (v2)', function (done) {
-      qs.latest(131, 2).then(function (response) {
-        should.exist.response
-        response.device_id.should.equal(131)
-        response.time_in_bed_duration.should.equal(26247)
-        done()
-      })
-    })
-
-    it('should get status for device (v4)', function (done) {
-      qs.latest(131, 4).then(function (response) {
+    it('should get presence data of device (v4)', function (done) {
+      qs.presence(1234, 131, 4).then(function (response) {
         should.exist.response
         response.device_id.should.equal(131)
         response.time_duration.should.equal(26552)
