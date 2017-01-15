@@ -68,8 +68,12 @@ Client.prototype.latest = function (deviceId, apiVersion) {
   return this.request.get(url)
 }
 
-Client.prototype.presence = function (periodId) {
-  return this.request.get('/v1/presence/' + periodId)
+Client.prototype.presence = function (periodId, deviceId, apiVersion) {
+  if (!apiVersion) apiVersion = 4
+  if (!periodId) periodId = 'latest'
+  var url = '/v' + apiVersion + '/presence/' + deviceId + '/' + periodId
+  if (apiVersion == 1) url = '/api/v1/presence/' + periodId
+  return this.request.get(url)
 }
 
 Client.prototype.trends = function (deviceId) {
