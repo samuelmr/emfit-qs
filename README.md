@@ -40,9 +40,10 @@ qs.user().then(function(data) {
 ```
 
 ## Features
-Supported APis
+Supported APis (in alphabetical order):
 
 ### latest
+Get latest sleep periods' data from a device.
 ```js
 
 qs.latest(deviceId)
@@ -50,6 +51,14 @@ qs.latest(deviceId)
 ```
 
 ### login
+Exchange username and password to a token (expires in 7 days).
+You can also log in to [qs.emfit.com](https://qs.emfit.com/) and check
+the ´remember_token´ parameter passed to API calls (e.g. with developer
+tools of your browser).
+
+The `data` parameter passed to callback function includes objects `user`,
+`device_settings` and `remember_token`.
+
 ```js
 
 qs.login('myusername', 'mypassword').then(function(data) {
@@ -59,6 +68,8 @@ qs.login('myusername', 'mypassword').then(function(data) {
 ```
 
 ### status
+Get status of a specific device. Possible statuses: "present", "absent",
+"network-error", "sensor-error" or "undeployed".
 ```js
 
 qs.status(deviceId)
@@ -66,6 +77,7 @@ qs.status(deviceId)
 ```
 
 ### statuses
+Get status of all devices your account has access to.
 ```js
 
 qs.statuses()
@@ -73,6 +85,7 @@ qs.statuses()
 ```
 
 ### user
+Get your account information.
 ```js
 
 qs.user()
