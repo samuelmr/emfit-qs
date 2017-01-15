@@ -46,7 +46,9 @@ Supported APis (in alphabetical order):
 Get latest sleep periods' data from a device.
 ```js
 
-qs.latest(deviceId)
+qs.latest(deviceId, apiVersion).then(function(data) {
+  console.log(data)
+})
 
 ```
 
@@ -66,13 +68,25 @@ qs.login('myusername', 'mypassword').then(function(data) {
 })
 
 ```
+### presence
+Get specific sleep period's data. You can set `apiVersion` to `1`, `2` or `4`.
+`qs.pesence(deviceId)` is the same as `qs.latest(deviceId)`
+```js
+
+qs.pesence(periodId, deviceId, apiVersion).then(function(data) {
+  console.log(data)
+})
+
+```
 
 ### status
 Get status of a specific device. Possible statuses: "present", "absent",
 "network-error", "sensor-error" or "undeployed".
 ```js
 
-qs.status(deviceId)
+qs.status(deviceId).then(function(data) {
+  console.log(data)
+})
 
 ```
 
@@ -80,7 +94,9 @@ qs.status(deviceId)
 Get status of all devices your account has access to.
 ```js
 
-qs.statuses()
+qs.statuses().then(function(data) {
+  console.log(data)
+})
 
 ```
 
@@ -88,6 +104,8 @@ qs.statuses()
 Get your account information.
 ```js
 
-qs.user()
+qs.user().then(function(data) {
+  console.log(data)
+})
 
 ```
