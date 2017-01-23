@@ -151,7 +151,6 @@ describe('Trends ', function () {
     it('should get trend data of device (v2)', function (done) {
       qs.trends(131, null, null, 2).then(function (response) {
         should.exist.response
-        should.exist.response.data
         response.data[0].hrv_rmssd_evening.should.equal(37.9)
         done()
       })
@@ -160,7 +159,6 @@ describe('Trends ', function () {
     it('should get trend data of device (v3)', function (done) {
       qs.trends(131, '2017-01-11', '2017-01-17', 3).then(function (response) {
         should.exist.response
-        should.exist.response.data
         response.data[0].sleep_class_awake_duration.should.equal(0.65)
         done()
       })
