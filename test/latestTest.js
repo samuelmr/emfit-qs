@@ -127,7 +127,7 @@ describe('Latest information ', function () {
       done()
     })
 
-    it('should get status for device (v1)', function (done) {
+    it('should get latest data from device (v1)', function (done) {
 
       qs.latest(131).then(function (response) {
         should.exist.response
@@ -137,7 +137,7 @@ describe('Latest information ', function () {
       })
     })
 
-    it('should get presence data of device (v2)', function (done) {
+    it('should get latest data from device (v2)', function (done) {
       qs.latest(131, 2).then(function (response) {
         should.exist.response
         response.device_id.should.equal(131)
@@ -146,7 +146,7 @@ describe('Latest information ', function () {
       })
     })
 
-    it('should get presence data of device (v4)', function (done) {
+    it('should get latest data from device (v4)', function (done) {
       qs.latest(131, 4).then(function (response) {
         should.exist.response
         response.device_id.should.equal(131)
