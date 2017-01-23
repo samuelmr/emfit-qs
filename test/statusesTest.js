@@ -3,7 +3,7 @@ const nock = require('nock'),
   QS = require('../index'),
   config = require('../config')
 
-describe('Device status ', function () {
+describe('Devices status ', function () {
 
     var qs = new QS('token')
     var statusData = [
@@ -27,7 +27,7 @@ describe('Device status ', function () {
       done()
     })
 
-    it('should get status for device', function (done) {
+    it('should get all statuses for user', function (done) {
 
       qs.statuses().then(function (response) {
         should.exist.response

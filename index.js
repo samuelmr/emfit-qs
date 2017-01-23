@@ -1,7 +1,7 @@
 const request = require('request-promise'),
   config = require('./config')
 
-// request.debug = true
+  // request.debug = true
 
 function Client(token) {
   this.init(token)
@@ -68,12 +68,29 @@ Client.prototype.latest = function (deviceId, apiVersion) {
   return this.request.get(url)
 }
 
-Client.prototype.presence = function (periodId) {
-  return this.request.get('/v1/presence/' + periodId)
+Client.prototype.presence = function (periodId, deviceId, apiVersion) {
+  if (!apiVersion) apiVersion = 4
+  if (!periodId) periodId = 'latest'
+  var url = '/v' + apiVersion + '/presence/' + deviceId + '/' + periodId
+  if (apiVersion == 1) url = '/api/v1/presence/' + periodId
+  return this.request.get(url)
 }
 
-Client.prototype.trends = function (deviceId) {
-  return this.request.get('/api/v1/trends/' + deviceId)
+Client.prototype.trends = function (deviceId, fromDate, toDate, apiVersion) {
+  if (!apiVersion) apiVersion = 3
+  fromDate = parseDate(fromDate)
+  toDate = parseDate(toDate)
+  var url = '/v' + apiVersion + '/trends/' + deviceId
+  if (apiVersion == 1) url = '/api/v1/trends/' + deviceId
+  if (apiVersion >= 3) url += '/' + fromDate + '/' + toDate
+  return this.request.get(url)
+}
+
+function parseDate(obj) {
+  var d = obj
+  if (typeof(d) != 'Date') d = new Date(d);
+  if (!d.toISOString) throw 'Invalid date' + obj
+  return d.toISOString().split('T')[0];
 }
 
 module.exports = Client

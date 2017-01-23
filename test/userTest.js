@@ -91,7 +91,7 @@ describe('User information ', function () {
       done()
     })
 
-    it('should get status for device', function (done) {
+    it('should get user information', function (done) {
 
       qs.user().then(function (response) {
         should.exist.response
